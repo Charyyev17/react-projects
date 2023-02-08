@@ -2,42 +2,192 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500|Roboto:300,400,500&display=swap" rel="stylesheet"/>
     <title>React App</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      html, body {
+        height: 100%;
+        line-height: 1.5;
+        font-family: 'Montserrat';
+        font-weight: 300;
+        color: black;
+      }
+
+      #root {
+        min-height: 100%;
+        position: relative;
+      }
+
+      .header-wrapper,
+      .main-wrapper,
+      .footer-wrapper {
+        width: 85%;
+        margin: auto;
+      }
+
+      .header-wrapper,
+      .main-wrapper {
+        padding: 10px;
+        margin: 2px auto;
+      }
+
+      h1 {
+        font-size: 70px;
+        font-weight: 300;
+      }
+
+      h2,
+      h3 {
+        font-weight: 300;
+      }
+
+      header {
+        background-color: navy;
+        color: white;
+        padding: 10px;
+      }
+
+      main {
+        padding: 10px;
+        padding-bottom: 60px;
+      }
+
+      ul {
+        margin-left: 15px;
+      }
+
+      ul li {
+        list-style: none;
+      }
+
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        background-color: sienna;
+        color: white;
+      }
+
+      .footer-wrapper {
+        font-weight: 400;
+        text-align: center;
+        line-height: 60px;
+      }
+
+    </style>
   </head>
+
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <!--tüm react kodlar babel(script) içinde yazılır -->
+    <script type="text/babel">
+      const rootElement = document.querySelector('#root')
+
+      //css style böyle de yazılabilir(<header style={headerStyles}>)
+      /*const headerStyles = {
+        backgroundColor: 'navy',
+        color: 'white',
+        fontFamily: 'Verdana',
+        padding: 25,
+        lineHeight: 1.5
+      }*/
+
+      const welcome = '30 Days Of React'
+      const title = 'Getting started'
+      const subtitle = 'Javascript Library'
+      const author = {
+        first_name: 'Luke',
+        last_name: 'Harris'
+      }
+      const date = 'Feb 7, 2023'
+
+      const numOne = 3
+      const numTwo = 4
+      const yearBorn = 1900
+      const currentYear = new Date().getFullYear()
+      const age = currentYear - yearBorn
+
+      const personAge = (
+              <p>{author.first_name} {author.last_name} is {age} years old</p>
+      )
+
+      const result = (
+              <p>{numOne} + {numTwo} = {numOne + numTwo}</p>
+      )
+
+      const techs = ['HTML', 'CSS', 'JS']
+
+      const techsFormatted = techs.map((tech) => <li key={tech}>{tech}</li>)
+
+      //html taglerinin tümünü kaplayan ayrıca bir html tag(<header>,<main>,<footer>) olması lazım
+      const header = (
+              <header>
+                <div className="header-wrapper">
+                  <h1>{welcome}</h1>
+                  <h2>{title}</h2>
+                  <h3>{subtitle}</h3>
+                  <p>Instructor: {author.first_name} {author.last_name}</p>
+                  <small>Date: {date}</small>
+                </div>
+              </header>
+      )
+
+      const main = (
+              <main>
+                <div className="main-wrapper">
+                  <p>
+                    Prerequisite to get started{' '}
+                    <strong>
+                      <em>react.js</em>
+                    </strong>
+                    :
+                  </p>
+                  <ul>
+                    {techsFormatted}
+                    {result}
+                    {personAge}
+                  </ul>
+                </div>
+              </main>
+      )
+
+      const footer = (
+              <footer>
+                <div className="footer-wrapper">
+                  <p>Copyright 2023</p>
+                </div>
+              </footer>
+      )
+
+      //bir JSX elementi içinde başka bir JSX elementi de yazılabilir, ama süslü parantez içerisinde ({header})
+      const app = (
+              <div className="app">
+                {header}
+                {main}
+                {footer}
+              </div>
+      )
+
+      /*********************************************************/
+
+      //jsx'i javascript koduna aktarmak(dönüştürmek) için babele ihtiyaç duyuyoruz
+      //ilk eleman jsx elementi(component), ikinci ise gösterilecek alan(div, container)
+      ReactDOM.render(app, rootElement)
+    </script>
+
   </body>
 </html>
